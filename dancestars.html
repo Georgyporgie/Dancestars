@@ -11,56 +11,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet" />
  <link rel="stylesheet" type="text/css" href="style.css">
   <style>
-    /* Layout */
-    body { margin: 0; font-family: system-ui, sans-serif; }
-    .page { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-    h5.inch { margin: 0 0 1rem; font-size: 1.4rem; text-align: center; }
-    h5 .dark { color: #555; }
+/* Layout */
+body { margin: 0; font-family: system-ui, sans-serif; }
+.page { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+h5.inch { margin: 0 0 1rem; font-size: 1.4rem; text-align: center; }
+h5 .dark { color: #555; }
 
-    .gallery { display: grid; gap: 1.5rem; justify-content: center; }
-    @media (min-width: 640px) { .gallery { grid-template-columns: 1fr 1fr; } }
+.gallery { display: grid; gap: 1.5rem; justify-content: center; }
+@media (min-width: 640px) { .gallery { grid-template-columns: 1fr 1fr; } }
 
-    /* Figure + image */
-    .artist-card { position: relative; display: inline-block; text-align: center; width: 100%; }
-    .artist-card img { display: block; width: 100%; height: auto; border-radius: 8px; }
+/* Figure + image */
+.artist-card { position: relative; display: inline-block; text-align: center; width: 100%; }
+.artist-card img { display: block; width: 100%; height: auto; border-radius: 8px; }
 
-    /* Caption base + animation */
-    .handwritten {
-      font-family: "Caveat", cursive;
-      font-size: 1.25rem;
-      margin-top: 0.4rem;
+/* Caption base + animation */
+.handwritten {
+  font-family: "Caveat", cursive;
+  font-size: 1.25rem;
+  margin-top: 0.4rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  color: #111;
+}
+.handwritten.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-      /* start hidden for animation */
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      color: #111; /* visible on light backgrounds (desktop) */
-    }
-    .handwritten.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* Mobile overlay */
+@media (max-width: 480px) {
+  .handwritten {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    z-index: 10;
+    margin-top: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  }
+  .handwritten.show {
+    transform: translate(-50%, 0);
+  }
+}
 
-    /* Mobile overlay with z-index */
-    @media (max-width: 480px) {
-      .handwritten {
-        position: absolute;
-        bottom: 5px;
-        left: 50%;
-        transform: translate(-50%, 10px);
-        font-size: 1rem;
-        background-color: rgba(0, 0, 0, 0.4);
-        color: #fff;
-        padding: 2px 6px;
-        border-radius: 4px;
-        z-index: 10;
-        margin-top: 0;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-      }
-      .handwritten.show {
-        transform: translate(-50%, 0);
-      }
-    }
   </style>
 </head>
 <body>
@@ -85,127 +84,136 @@
   </div>
 
   <script>
-    // ---------- Data ----------
-    const IMAGES = {
-      sunday: [
-        { start: 6,  end: 12, src: 'images/Ava Max.png',           alt: 'Sunday Service',             artist: 'Ava Max' },
-        { start: 12, end: 17, src: 'images/Bebe Rexha.png',        alt: 'Bebe Rexha',                 artist: 'Bebe Rexha' },
-        { start: 17, end: 21, src: 'images/Rihanna.jpg',          alt: 'DJ Set',                      artist: 'Rihanna' },
-        { start: 21, end: 24, src: 'images/Bebe Rexha.png',        alt: 'Off-hours',                  artist: 'Bebe Rexha' },
-        { start: 0,  end: 6,  src: 'images/janelle monae.jpg',     alt: 'Off-hours',                  artist: 'Janelle Monáe' }
-      ],
-      weekendish: [
-        { start: 6,  end: 12, src: 'images/Ava Max.png',           alt: 'Sunday Service',             artist: 'Ava Max' },
-        { start: 12, end: 17, src: 'images/Bebe Rexha.png',        alt: 'Bebe Rexha',                 artist: 'Bebe Rexha' },
-        { start: 17, end: 21, src: 'images/Doechii.jpg',          alt: 'DJ Set',                      artist: 'Doechii' },
-        { start: 21, end: 24, src: 'images/The weeknd.png',        alt: 'Off-hours',                  artist: 'The weeknd' },
-        { start: 0,  end: 6,  src: 'images/janelle monae.jpg',     alt: 'Off-hours',                  artist: 'Janelle Monáe' }
-      ],
-      weekday: [
-        { start: 6,  end: 12, src: 'images/sexy.jpg',              alt: 'Sunday Service',             artist: 'Sexy Sunny Fans' },
-        { start: 12, end: 17, src: 'images/The weeknd.png',        alt: 'The Weeknd',                 artist: 'The Weeknd' },
-        { start: 17, end: 21, src: 'images/Lola Young.avif',       alt: 'DJ Set',                     artist: 'Lola Young' },
-        { start: 21, end: 24, src: 'images/saweetie-portrait.avif',  alt: 'Off-hours',                artist: 'Saweetie' },
-        { start: 0,  end: 6,  src: 'images/Elderbrook Cola.jfif',  alt: 'Off-hours',                  artist: 'Elderbrook Cola' }
-      ]
-    };
+   // ---------- Data: 3 images per day ----------
+const IMAGES = {
+  sunday: [
+    { start: 6,  end: 12, src: 'images/sun-morning.jpg', alt: 'Sunday Morning', artist: 'Artist 1' },
+    { start: 12, end: 18, src: 'images/sun-afternoon.jpg', alt: 'Sunday Afternoon', artist: 'Artist 2' },
+    { start: 18, end: 24, src: 'images/sun-evening.jpg', alt: 'Sunday Evening', artist: 'Artist 3' }
+  ],
+  monday: [
+    { start: 6,  end: 12, src: 'images/mon-morning.jpg', alt: 'Monday Morning', artist: 'Artist 4' },
+    { start: 12, end: 18, src: 'images/mon-afternoon.jpg', alt: 'Monday Afternoon', artist: 'Artist 5' },
+    { start: 18, end: 24, src: 'images/mon-evening.jpg', alt: 'Monday Evening', artist: 'Artist 6' }
+  ],
+  tuesday: [
+    { start: 6,  end: 12, src: 'images/tue-morning.jpg', alt: 'Tuesday Morning', artist: 'Artist 7' },
+    { start: 12, end: 18, src: 'images/tue-afternoon.jpg', alt: 'Tuesday Afternoon', artist: 'Artist 8' },
+    { start: 18, end: 24, src: 'images/tue-evening.jpg', alt: 'Tuesday Evening', artist: 'Artist 9' }
+  ],
+  wednesday: [
+    { start: 6,  end: 12, src: 'images/wed-morning.jpg', alt: 'Wednesday Morning', artist: 'Artist 10' },
+    { start: 12, end: 18, src: 'images/wed-afternoon.jpg', alt: 'Wednesday Afternoon', artist: 'Artist 11' },
+    { start: 18, end: 24, src: 'images/wed-evening.jpg', alt: 'Wednesday Evening', artist: 'Artist 12' }
+  ],
+  thursday: [
+    { start: 6,  end: 12, src: 'images/thu-morning.jpg', alt: 'Thursday Morning', artist: 'Artist 13' },
+    { start: 12, end: 18, src: 'images/thu-afternoon.jpg', alt: 'Thursday Afternoon', artist: 'Artist 14' },
+    { start: 18, end: 24, src: 'images/thu-evening.jpg', alt: 'Thursday Evening', artist: 'Artist 15' }
+  ],
+  friday: [
+    { start: 6,  end: 12, src: 'images/fri-morning.jpg', alt: 'Friday Morning', artist: 'Artist 16' },
+    { start: 12, end: 18, src: 'images/fri-afternoon.jpg', alt: 'Friday Afternoon', artist: 'Artist 17' },
+    { start: 18, end: 24, src: 'images/fri-evening.jpg', alt: 'Friday Evening', artist: 'Artist 18' }
+  ],
+  saturday: [
+    { start: 6,  end: 12, src: 'images/sat-morning.jpg', alt: 'Saturday Morning', artist: 'Artist 19' },
+    { start: 12, end: 18, src: 'images/sat-afternoon.jpg', alt: 'Saturday Afternoon', artist: 'Artist 20' },
+    { start: 18, end: 24, src: 'images/sat-evening.jpg', alt: 'Saturday Evening', artist: 'Artist 21' }
+  ]
+};
 
-    // ---------- Helpers ----------
-    function isSunday(d) { return d.getDay() === 0; }
-    function isWeekendish(d) {
-      const day = d.getDay();
-      const hour = d.getHours();
-      return day === 6 || (day === 5 && hour >= 18);
-    }
-    function getRulesFor(now) {
-      return isSunday(now) ? IMAGES.sunday : (isWeekendish(now) ? IMAGES.weekendish : IMAGES.weekday);
-    }
-    function getRuleFor(now) {
-      const hour = now.getHours();
-      return getRulesFor(now).find(r => hour >= r.start && hour < r.end);
-    }
-    function getComplementaryRule(now, excludeSrc) {
-      const rules = getRulesFor(now);
-      const currentIndex = rules.findIndex(r => r.src === excludeSrc);
-      if (currentIndex === -1) return getRuleFor(now);
-      const nextIndex = (currentIndex + 1) % rules.length;
-      return rules[nextIndex];
-    }
-    function preloadImages() {
-      // Safe preloading without Array.flat()
-      const groups = Object.keys(IMAGES);
-      for (const key of groups) {
-        const arr = IMAGES[key];
-        for (const r of arr) {
-          const i = new Image();
-          i.src = r.src;
-        }
-      }
-    }
-    function deriveArtistName(src) {
-      const filename = src.split('/').pop().replace(/\.[^.]+$/, '');
-      const cleaned = filename.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
-      return cleaned.replace(/\b\w/g, c => c.toUpperCase());
-    }
-    function getArtist(rule) {
-      return rule.artist || deriveArtistName(rule.src);
-    }
+// ---------- Helpers ----------
+function getRulesFor(now) {
+  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  return IMAGES[dayNames[now.getDay()]];
+}
 
-    // ---------- Render ----------
-    function setImage(el, rule) {
-      if (!el || !rule) return;
+function getRuleFor(now) {
+  const hour = now.getHours();
+  return getRulesFor(now).find(r => hour >= r.start && hour < r.end);
+}
 
-      const cap = document.getElementById(`${el.id}-name`);
+function getComplementaryRule(now, excludeSrc) {
+  const rules = getRulesFor(now);
+  const currentIndex = rules.findIndex(r => r.src === excludeSrc);
+  if (currentIndex === -1) return getRuleFor(now);
+  const nextIndex = (currentIndex + 1) % rules.length;
+  return rules[nextIndex];
+}
 
-      // Only skip if both image AND caption are already correct
-      const capHasText = cap && cap.textContent && cap.textContent.length > 0;
-      if (el.dataset.currentSrc === rule.src && capHasText) return;
-
-      el.src = rule.src;
-      el.alt = rule.alt || '';
-      el.dataset.currentSrc = rule.src;
-
-      if (cap) {
-        cap.textContent = getArtist(rule);
-        // retrigger animation
-        cap.classList.remove('show');
-        void cap.offsetWidth; // force reflow to restart CSS transition
-        cap.classList.add('show');
-      }
+function preloadImages() {
+  for (const day in IMAGES) {
+    for (const r of IMAGES[day]) {
+      const i = new Image();
+      i.src = r.src;
     }
+  }
+}
 
-    function updateImages() {
-      const now = new Date();
-      const ruleTravolta = getRuleFor(now);
-      const ruleMax = getComplementaryRule(now, ruleTravolta.src);
+function deriveArtistName(src) {
+  const filename = src.split('/').pop().replace(/\.[^.]+$/, '');
+  const cleaned = filename.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+  return cleaned.replace(/\b\w/g, c => c.toUpperCase());
+}
 
-      setImage(document.getElementById('travolta'), ruleTravolta);
-      setImage(document.getElementById('max'), ruleMax);
-    }
+function getArtist(rule) {
+  return rule.artist || deriveArtistName(rule.src);
+}
 
-    function scheduleNextUpdate() {
-      const now = new Date();
-      const next = new Date(now);
-      next.setSeconds(0, 0);
-      if (now.getSeconds() !== 0 || now.getMilliseconds() !== 0) {
-        next.setMinutes(now.getMinutes() + 1);
-      }
-      const ms = next - now;
-      setTimeout(() => {
-        updateImages();
-        setInterval(updateImages, 60 * 1000);
-      }, ms);
-    }
+// ---------- Render ----------
+function setImage(el, rule) {
+  if (!el || !rule) return;
+  const cap = document.getElementById(`${el.id}-name`);
+  const capHasText = cap && cap.textContent && cap.textContent.length > 0;
+  if (el.dataset.currentSrc === rule.src && capHasText) return;
 
-    // ---------- Init ----------
-    window.addEventListener('DOMContentLoaded', () => {
-      preloadImages();
-      updateImages();
-      scheduleNextUpdate();
-    });
+  el.src = rule.src;
+  el.alt = rule.alt || '';
+  el.dataset.currentSrc = rule.src;
+
+  if (cap) {
+    cap.textContent = getArtist(rule);
+    cap.classList.remove('show');
+    void cap.offsetWidth;
+    cap.classList.add('show');
+  }
+}
+
+function updateImages() {
+  const now = new Date();
+  const ruleTravolta = getRuleFor(now);
+  const ruleMax = getComplementaryRule(now, ruleTravolta.src);
+
+  setImage(document.getElementById('travolta'), ruleTravolta);
+  setImage(document.getElementById('max'), ruleMax);
+}
+
+function scheduleNextUpdate() {
+  const now = new Date();
+  const next = new Date(now);
+  next.setSeconds(0, 0);
+  if (now.getSeconds() !== 0 || now.getMilliseconds() !== 0) {
+    next.setMinutes(now.getMinutes() + 1);
+  }
+  const ms = next - now;
+  setTimeout(() => {
+    updateImages();
+    setInterval(updateImages, 60 * 1000);
+  }, ms);
+}
+
+// ---------- Init ----------
+window.addEventListener('DOMContentLoaded', () => {
+  preloadImages();
+  updateImages();
+  scheduleNextUpdate();
+});
+
   </script>
 </body>
 </html>
+
 
 
 
