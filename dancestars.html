@@ -4,78 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sunny Dance Radio Stars</title>
-
-  <!-- Handwritten Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet" />
- <link rel="stylesheet" type="text/css" href="style.css">
-  <style>
-/* Layout */
-body { margin: 0; font-family: system-ui, sans-serif; }
-.page { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-h5.inch { margin: 0 0 1rem; font-size: 1.4rem; text-align: center; }
-h5 .dark { color: #555; }
-
-.gallery { display: grid; gap: 1.5rem; justify-content: center; }
-@media (min-width: 640px) { .gallery { grid-template-columns: 1fr 1fr; } }
-
-/* Figure + image */
-.artist-card { position: relative; display: inline-block; text-align: center; width: 100%; }
-.artist-card img { display: block; width: 100%; height: auto; border-radius: 8px; }
-
-/* Caption base + animation */
-.handwritten {
-  font-family: "Caveat", cursive;
-  font-size: 1.25rem;
-  margin-top: 0.4rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  color: #111;
-}
-.handwritten.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Mobile overlay */
-@media (max-width: 480px) {
-  .handwritten {
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translate(-50%, 10px);
-    font-size: 1rem;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: #fff;
-    padding: 2px 6px;
-    border-radius: 4px;
-    z-index: 10;
-    margin-top: 0;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-  }
-  .handwritten.show {
-    transform: translate(-50%, 0);
-  }
-}
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <div class="page">
-  
-<br>
-
-
     <div class="gallery">
       <figure class="artist-card">
         <img id="travolta" alt="Scheduled visual" />
         <figcaption id="travolta-name" class="handwritten"></figcaption>
       </figure>
-<br>
-<br>
-<br>
+
       <figure class="artist-card">
         <img id="max" alt="Secondary visual" />
         <figcaption id="max-name" class="handwritten"></figcaption>
@@ -84,191 +22,78 @@ h5 .dark { color: #555; }
   </div>
 
   <script>
-   // ---------- Data: 3 images per day ----------
-const IMAGES = {
-  sunday: [
-    { start: 0,  end: 12, src: 'images/Ava Max.png', alt: 'Sunday Morning', artist: 'Ava Max' },
-    { start: 12, end: 19, src: 'images/Michael Jacks.png', alt: 'Sunday Evening', artist: 'Michael Jackson' },
-    { start: 19, end: 24, src: 'images/Rihanna.jpg', alt: 'Sunday Evening', artist: 'Rihanna' }
-  ],
-  monday: [
-   { start: 0,  end: 12, src: 'images/Nona.jpg', alt: 'Monday Morning', artist: 'Nona' },
-    { start: 12, end: 18, src: 'images/Michael Jacks.png', alt: 'Monday Afternoon', artist: 'Michael Jackson'},
-    { start: 18, end: 24, src: 'images/Seal.jfif', alt: 'Monday Evening', artist: 'Seal' }
-  ],
-  tuesday: [
-   { start: 0,  end: 12, src: 'images/janelle monae.jpg', alt: 'Tuesday Morning', artist: 'Janelle Monae' },
-    { start: 12, end: 18, src: 'images/Elderbrook Cola.jfif', alt: 'Tuesday Afternoon', artist: 'Elderbrook Cola' },
-    { start: 18, end: 24, src: 'images/Lola Young.avif', alt: 'Tuesday Evening', artist: 'Lola Young' }
-  ],
-  wednesday: [
-      { start: 0,  end: 12, src: 'images/Nona.jpg', alt: 'Monday Morning', artist: 'Nona' },
-    { start: 12, end: 18, src: 'images/Noa Kirel.jpg', alt: 'Monday Afternoon', artist: 'Noa Kirel' },
-    { start: 18, end: 24, src: 'images/CalvinHarris.png', alt: 'Monday Evening', artist: 'Calvin Harris' }
-  ],
-  thursday: [
-    { start: 0,  end: 12, src: 'images/Ava Max.png', alt: 'Thursday Morning', artist: 'Ava Max' },
-    { start: 12, end: 18, src: 'images/The weeknd.png', alt: 'Thursday Afternoon', artist: 'The weeknd' },
-    { start: 18, end: 24, src: 'images/sexy.jpg', alt: 'Thursday Evening', artist: 'Sexy Sunny Fans' }
-  ],
-  friday: [
-    { start: 0,  end: 12, src: 'images/Ava Max.png', alt: 'Friday Morning', artist: 'Ava Max' },
-    { start: 12, end: 18, src: 'images/The weeknd.png', alt: 'Friday Afternoon', artist: 'The weeknd' },
-    { start: 18, end: 24, src: 'images/Michael Jacks.png', alt: 'Friday Evening', artist: 'Michael Jackson' }
-  ],
-  saturday: [
-    { start: 0,  end: 12, src: 'images/janelle monae.jpg', alt: 'Saturday Morning', artist: 'Janelle Monae' },
-    { start: 12, end: 18, src: 'images/Elderbrook Cola.jfif', alt: 'Saturday Afternoon', artist: 'Elderbrook Cola' },
-    { start: 18, end: 24, src: 'images/Lola Young.avif', alt: 'Saturday Evening', artist: 'Lola Young' }
-  ]
-};
+  // ---------- Data ----------
+  const IMAGES = {
+    sunday: [
+      { start: 0,  end: 12, src: 'images/Ava Max.png', alt: 'Sunday Morning', artist: 'Ava Max' },
+      { start: 12, end: 19, src: 'images/Michael Jacks.png', alt: 'Sunday Afternoon', artist: 'Michael Jackson' },
+      { start: 19, end: 24, src: 'images/Rihanna.jpg', alt: 'Sunday Evening', artist: 'Rihanna' }
+    ],
+    // ... other days ...
+  };
 
-// ---------- Helpers ----------
-function getRulesFor(now) {
-  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  return IMAGES[dayNames[now.getDay()]];
-}
-
-function getRuleFor(now) {
-  const hour = now.getHours();
-  return getRulesFor(now).find(r => hour >= r.start && hour < r.end);
-}
-
-function getComplementaryRule(now, excludeSrc) {
-  const rules = getRulesFor(now);
-  const currentIndex = rules.findIndex(r => r.src === excludeSrc);
-  if (currentIndex === -1) return getRuleFor(now);
-  const nextIndex = (currentIndex + 1) % rules.length;
-  return rules[nextIndex];
-}
-
-function preloadImages() {
-  for (const day in IMAGES) {
-    for (const r of IMAGES[day]) {
-      const i = new Image();
-      i.src = r.src;
+  function getRulesFor(now) {
+    const dayNames = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+    return IMAGES[dayNames[now.getDay()]];
+  }
+  function getRuleFor(now) {
+    const hour = now.getHours();
+    return getRulesFor(now).find(r => hour >= r.start && hour < r.end);
+  }
+  function getComplementaryRule(now, excludeSrc) {
+    const rules = getRulesFor(now);
+    const currentIndex = rules.findIndex(r => r.src === excludeSrc);
+    if (currentIndex === -1) return getRuleFor(now);
+    const nextIndex = (currentIndex + 1) % rules.length;
+    return rules[nextIndex];
+  }
+  function setImage(el, rule) {
+    if (!el || !rule) return;
+    const cap = document.getElementById(`${el.id}-name`);
+    el.src = rule.src;
+    el.alt = rule.alt || '';
+    if (cap) {
+      cap.textContent = rule.artist;
+      cap.classList.add('show');
     }
   }
-}
-
-function deriveArtistName(src) {
-  const filename = src.split('/').pop().replace(/\.[^.]+$/, '');
-  const cleaned = filename.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
-  return cleaned.replace(/\b\w/g, c => c.toUpperCase());
-}
-
-function getArtist(rule) {
-  return rule.artist || deriveArtistName(rule.src);
-}
-
-// ---------- Render ----------
-function setImage(el, rule) {
-  if (!el || !rule) return;
-  const cap = document.getElementById(`${el.id}-name`);
-  const capHasText = cap && cap.textContent && cap.textContent.length > 0;
-  if (el.dataset.currentSrc === rule.src && capHasText) return;
-
-  el.src = rule.src;
-  el.alt = rule.alt || '';
-  el.dataset.currentSrc = rule.src;
-
-  if (cap) {
-    cap.textContent = getArtist(rule);
-    cap.classList.remove('show');
-    void cap.offsetWidth;
-    cap.classList.add('show');
+  function updateImages() {
+    const now = new Date();
+    const ruleTravolta = getRuleFor(now);
+    const ruleMax = getComplementaryRule(now, ruleTravolta.src);
+    setImage(document.getElementById('travolta'), ruleTravolta);
+    setImage(document.getElementById('max'), ruleMax);
   }
-}
 
-function updateImages() {
-  const now = new Date();
-  const ruleTravolta = getRuleFor(now);
-  const ruleMax = getComplementaryRule(now, ruleTravolta.src);
-
-  setImage(document.getElementById('travolta'), ruleTravolta);
-  setImage(document.getElementById('max'), ruleMax);
-}
-
-function scheduleNextUpdate() {
-  const now = new Date();
-  const next = new Date(now);
-  next.setSeconds(0, 0);
-  if (now.getSeconds() !== 0 || now.getMilliseconds() !== 0) {
-    next.setMinutes(now.getMinutes() + 1);
+  // ---------- Ritual ----------
+  const sounds = [
+    "muziek/effects/Michael Speakin Fans.mp3",
+    "muziek/effects/Michael Speakin Fans - 2.mp3",
+    "muziek/effects/Michael Speakin Fans - 3.mp3"
+  ];
+  function playSound(file) {
+    const audio = new Audio(file);
+    audio.play().catch(err => console.log("Play failed:", err));
   }
-  const ms = next - now;
-  setTimeout(() => {
+
+  document.addEventListener("DOMContentLoaded", () => {
     updateImages();
-    setInterval(updateImages, 60 * 1000);
-  }, ms);
-}
 
-// ---------- Init ----------
-window.addEventListener('DOMContentLoaded', () => {
-  preloadImages();
-  updateImages();
-  scheduleNextUpdate();
-});
+    const travoltaImg = document.getElementById("travolta");
+    travoltaImg.addEventListener("click", () => {
+      const currentArtist = document.getElementById("travolta-name").textContent;
+      if (currentArtist === "Michael Jackson") {
+        // Unlock audio
+        const unlock = new Audio();
+        unlock.load();
+        console.log("Audio unlocked");
 
+        // Play one random Michael sound
+        const chosen = sounds[Math.floor(Math.random() * sounds.length)];
+        playSound(chosen);
+      }
+    });
+  });
   </script>
-
-
-<script>
-const sounds = [
-  "muziek/effects/Michael Speakin Fans.mp3",
-  "muziek/effects/Michael Speakin Fans - 2.mp3",
-  "muziek/effects/Michael Speakin Fans - 3.mp3"
-];
-
-function playSound(file) {
-  const audio = new Audio(file);
-  audio.play()
-    .then(() => console.log("Playing:", file))
-    .catch(err => console.log("Play failed:", err));
-}
-
-// Attach ritual to Michael’s image
-document.getElementById("travolta").addEventListener("click", () => {
-  // Unlock audio with gesture
-  const unlock = new Audio();
-  unlock.load(); // counts as gesture without error
-  console.log("Audio unlocked");
-
-  // Play one random sound once
-  const chosen = sounds[Math.floor(Math.random() * sounds.length)];
-  playSound(chosen);
-});
-</script>
-
-
-
-
-
-
-
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
