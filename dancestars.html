@@ -88,8 +88,8 @@ h5 .dark { color: #555; }
 const IMAGES = {
   sunday: [
     { start: 0,  end: 12, src: 'images/Ava Max.png', alt: 'Sunday Morning', artist: 'Ava Max' },
-    { start: 12, end: 18, src: 'images/Michael Jacks.png', alt: 'Sunday Evening', artist: 'Michael Jackson' },
-    { start: 18, end: 24, src: 'images/Rihanna.jpg', alt: 'Sunday Evening', artist: 'Rihanna' }
+    { start: 12, end: 19, src: 'images/Michael Jacks.png', alt: 'Sunday Evening', artist: 'Michael Jackson' },
+    { start: 19, end: 24, src: 'images/Rihanna.jpg', alt: 'Sunday Evening', artist: 'Rihanna' }
   ],
   monday: [
    { start: 0,  end: 12, src: 'images/Nona.jpg', alt: 'Monday Morning', artist: 'Nona' },
@@ -211,8 +211,46 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
   </script>
+
+
+<script>
+const sounds = [
+  "muziek/effects/Michael Speakin Fans.mp3",
+  "muziek/effects/Michael Speakin Fans - 2.mp3",
+  "muziek/effects/Michael Speakin Fans - 3.mp3"
+];
+
+function playSound(file) {
+  const audio = new Audio(file);
+  audio.play()
+    .then(() => console.log("Playing:", file))
+    .catch(err => console.log("Play failed:", err));
+}
+
+// Attach ritual to Michael’s image
+document.getElementById("travolta").addEventListener("click", () => {
+  // Unlock audio with gesture
+  const unlock = new Audio();
+  unlock.load(); // counts as gesture without error
+  console.log("Audio unlocked");
+
+  // Play one random sound once
+  const chosen = sounds[Math.floor(Math.random() * sounds.length)];
+  playSound(chosen);
+});
+</script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>
+
 
 
 
