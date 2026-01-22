@@ -61,7 +61,7 @@ background-color: transparent;
 background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
-filter:opacity(20%); display: block; margin: auto auto auto auto; z-index: -200; border-radius:10px;
+ filter: brightness(105%)saturation(105%) contrast(105%) opacity(75%); display: block; margin: auto auto auto auto; z-index: -200; border-radius:10px;
 width: 355px; height: 370px;
 }
 
@@ -86,7 +86,7 @@ width: 355px; height: 370px;
 background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
-filter:opacity(20%); display: block; margin: auto auto auto auto; z-index: -200; border-radius:10px;
+ filter: brightness(105%)saturation(105%) contrast(105%) opacity(75%); display: block; margin: auto auto auto auto; z-index: -200; border-radius:10px;
 width: 355px; height: 370px;
 }
 
