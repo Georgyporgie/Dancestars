@@ -62,7 +62,7 @@ background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
  filter: brightness(105%)saturation(105%) contrast(105%) opacity(75%); display: block; margin: auto auto auto auto; z-index: -200; border-radius:10px;
-width: 355px; height: 370px;
+width: 355px; height: 370px; border: solid 1px gray;
 }
 
 /* For small screens, adjust position or swap image */
@@ -87,6 +87,6 @@ background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
  filter: brightness(105%)saturation(105%) contrast(105%) opacity(75%); display: block; margin: auto auto auto auto; z-index: -200; border-radius:10px;
-width: 355px; height: 370px;
+width: 355px; height: 370px; border: solid 1px gray;
 }
 
